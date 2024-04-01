@@ -4,9 +4,11 @@
 
 Aurora is a simple web framework for the Lune Runtime inspired by [Express](https://expressjs.com/).
 
-<br>
+[docs](https://docs.page/jonasarensmann/aurora)
 
 # ! Considered unstable !
+
+<br>
 
 ### Example
 
@@ -21,23 +23,9 @@ end)
 aurora.createServer() -- runs the server on port 8080
 ```
 
-### Getting started
+### [Getting started](https://docs.page/jonasarensmann/aurora/getting-started)
 
-currently only available via git
-
-#### 1. Clone the Repository at the root of your project
-
-```bash
-git clone https://github.com/jonasarensmann/aurora.git
-```
-
-#### 2. create main.luau and add the example code
-
-#### 3. run the server
-
-```bash
-lune run main.luau
-```
+<br>
 
 ### At the moment, html special characters are not escaped automatically. This will be changed in the future.
 
