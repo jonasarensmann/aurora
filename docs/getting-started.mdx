@@ -1,0 +1,35 @@
+---
+title: Getting Started
+description: Get started with docs.page on your repository.
+---
+
+### Getting started
+
+Currently only available via git
+
+1. Clone the Repository at the root of your project
+
+```bash
+git clone https://github.com/jonasarensmann/aurora.git
+```
+
+2. Create main.luau in your project root and add the example code
+
+```lua
+local aurora = require("aurora/main")
+
+aurora.get("/", function()
+    return { body = "Index", status = 200 }
+end)
+
+aurora.createServer({
+    port = 8080,
+    debug = true,
+})
+```
+
+3. Run the server
+
+```bash
+lune run main.luau
+```

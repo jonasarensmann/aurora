@@ -1,0 +1,24 @@
+{
+  "name": "Aurora",
+  "description": "Aurora a simple express-like web framework for the Lune Runtime",
+  "sidebar": [
+    [
+      "Getting Started",
+      [
+        ["Overview", "/"],
+        ["Getting Started", "/getting-started"],
+        ["Configuration", "/configuration"]
+      ]
+    ],
+    [
+      "Basics",
+      [
+        ["Routing", "/routing"],
+        ["Middleware", "/middleware"],
+        ["Request", "/request"],
+        ["Response", "/response"],
+        ["HTML Templating", "/html-templating"]
+      ]
+    ]
+  ]
+}

@@ -1,0 +1,82 @@
+---
+title: Routing
+description: Learn how to use the routing system in Aurora
+---
+
+# Routing
+
+- [Basic Routing](#basic-routing)
+
+## Basic Routing
+
+Aurora uses "get", "post", "put", "patch", "delete" methods to register routes.
+
+#### Get
+
+The `get` method is used to register a route that will only respond to HTTP GET requests:
+
+```lua
+Aurora.get('/user', function()
+    return { body = "Hello World", status = 200 }
+end)
+```
+
+```lua
+function get(path: string, handler: (request: Request) -> Response, middleware: { string }?)
+```
+
+#### Post
+
+The `post` method is used to register a route that will only respond to HTTP POST requests:
+
+```lua
+Aurora.post('/user', function()
+    return { body = "Hello World", status = 200 }
+end)
+```
+
+```lua
+function post(path: string, handler: (request: Request) -> Response, middleware: { string }?)
+```
+
+#### Put
+
+The `put` method is used to register a route that will only respond to HTTP PUT requests:
+
+```lua
+Aurora.put('/user', function()
+    return { body = "Hello World", status = 200 }
+end)
+```
+
+```lua
+function put(path: string, handler: (request: Request) -> Response, middleware: { string }?)
+```
+
+#### Patch
+
+The `patch` method is used to register a route that will only respond to HTTP PATCH requests:
+
+```lua
+Aurora.patch('/user', function()
+    return { body = "Hello World", status = 200 }
+end)
+```
+
+```lua
+function patch(path: string, handler: (request: Request) -> Response, middleware: { string }?)
+```
+
+#### Delete
+
+The `delete` method is used to register a route that will only respond to HTTP DELETE requests:
+
+```lua
+Aurora.delete('/user', function()
+    return { body = "Hello World", status = 200 }
+end)
+```
+
+```lua
+function delete(path: string, handler: (request: Request) -> Response, middleware: { string }?)
+```

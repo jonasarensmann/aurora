@@ -1,0 +1,101 @@
+---
+title: HTML Templating
+---
+
+# HTML Templating
+
+<Warning>
+  HTML Templating is considered unstable and may change in the future
+</Warning>
+
+## Introduction
+
+HTML templating is a technique used to create HTML files with dynamic content. It is a way to separate the HTML structure from the content, and allows us to generate HTML files with different content based on the data we have.
+
+Aurora has built-in support for simple HTML Templating
+
+## Usage
+
+To use HTML templating in Aurora, you need to create a template file with the `.html` extension. In this file, you can use the `{{ }}` syntax to insert dynamic content.
+
+Here is an example of a simple template file:
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{title}}</title>
+  </head>
+  <body>
+    <h1>{{heading}}</h1>
+    <p>{{content}}</p>
+  </body>
+</html>
+```
+
+In this template file, we have three placeholders: `{{ title }}`, `{{ heading }}`, and `{{ content }}`. These placeholders will be replaced with the actual values when we render the template.
+
+To render the template, we can use the `sendHtml` function. Here is an example:
+
+```lua
+local aurora = require("aurora/main")
+
+aurora.get("/hello", function(request)
+    local data = {
+        title = "Hello World",
+        heading = "Welcome to Aurora",
+        content = "This is a simple example of HTML templating in Aurora."
+    }
+
+    return aurora.sendHtml("index.html", data) -- Path is relative to the working directory
+end)
+
+aurora.createServer() -- http://localhost:8080/hello
+```
+
+In this example, we are rendering the `index.html` template file with the data provided in the `data` table. The `sendHtml` function will replace the placeholders in the template file with the actual values and return the resulting HTML content.
+
+## Loops
+
+<Info>
+  Loops are still in Development and only support arrays at the moment
+</Info>
+
+You can also use loops in your templates to generate dynamic content. Here is an example:
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{title}}</title>
+  </head>
+  <body>
+    <h1>{{heading}}</h1>
+    <ul>
+      {{#foreach item in items}}
+      <li>{{item}}</li>
+      {{#endforeach}}
+    </ul>
+  </body>
+</html>
+```
+
+In this template file, we have a loop that iterates over the `items` array and generates a list item for each item in the array.
+
+To render the template with the loop, you can use the following luau code:
+
+```lua
+local aurora = require("aurora/main")
+
+aurora.get("/hello", function(request)
+    local data = {
+        title = "Hello World",
+        heading = "Welcome to Aurora",
+        items = {"Item 1", "Item 2", "Item 3"}
+    }
+
+    return aurora.sendHtml("index.html", data)
+end)
+
+aurora.createServer() -- http://localhost:8080/hello
+```

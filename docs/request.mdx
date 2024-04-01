@@ -1,0 +1,27 @@
+---
+title: Request
+---
+
+# Request
+
+The 'Request' object is used to access the request data sent by the client to the server. It is available in the first argument of the route or middleware handler function.
+
+## Properties
+
+- path (string): The path of the request URL.
+- method (string): The HTTP method of the request.
+- headers (object): The headers of the request.
+- query (object): The query parameters of the request.
+- body (string): The body of the request.
+
+---
+
+```lua
+type Request = {
+    path: string,
+    method: string,
+    headers: { [string]: string },
+    query: { [string]: string },
+    body: string
+}
+```

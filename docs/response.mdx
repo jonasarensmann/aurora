@@ -1,0 +1,46 @@
+---
+title: Response
+---
+
+# Response
+
+A response object represents the response to a request. It contains the status code, the body of the response, and the headers.
+
+## Properties
+
+- status (number): The status code of the response.
+- body (string): The body of the response.
+- headers (object): The headers of the response.
+
+## Example
+
+```lua
+local aurora = require("aurora")
+
+aurora.get("/", function(request)
+    return {
+        status = 200,
+        body = "Hello, world!",
+    }
+end)
+
+aurora.createServer()
+```
+
+## Response Wrapper
+
+There are some helper functions that can be used to create a response object.
+
+```lua
+function sendHtml(html: string, keys: { [string]: string | {any} | number }?, status: number?): Response
+```
+
+---
+
+```lua
+type Response = {
+    status: number,
+    body: string,
+    headers: { [string]: string }?
+}
+```

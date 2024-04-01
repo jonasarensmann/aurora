@@ -1,0 +1,31 @@
+---
+title: Overview
+description: Aurora is a simple web framework for the Lune Runtime inspired by Express.
+---
+
+# Aurora
+
+Aurora is a simple web framework for the [Lune Runtime](https://github.com/lune-org/lune) inspired by [Express](https://expressjs.com/).
+
+### Example
+
+```lua
+local aurora = require("aurora/main")
+
+aurora.get("/", function()
+    return { body = "Index", status = 200 }
+end)
+
+aurora.createServer({
+    port = 8080,
+    debug = true,
+})
+```
+
+[Getting Started](/getting-started)
+
+---
+
+#### At the moment, html special characters are not escaped automatically. This will be changed in the future.
+
+use `aurora.escapeHtml` to escape html special characters.

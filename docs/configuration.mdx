@@ -1,0 +1,38 @@
+---
+title: Configuration
+---
+
+# Configuration
+
+## Introduction
+
+The configuration is done in the `createServer` method. The configuration is an object with the following properties:
+
+- `port` (number): The port to listen on. Default is `8080`.
+- `debug` (boolean): If `true`, the server will show debug information on error Pages. Default is `false`.
+- `logging` (table): The logging configuration.
+- `logging.enabled` (boolean): If `true`, the server will log requests. Default is `true`.
+- `logging.logToFile` (boolean): If `true`, the server will log requests to a file. Default is `false`.
+- `logging.logFilePath` (string): The path to the log file. Default is nil.
+
+## Example
+
+```lua
+aurora.createServer({
+    port = 8080,
+    debug = true,
+    logging = {
+        enabled = true,
+        logToFile = false,
+        logFilePath = "request.log" -- Paths are relative to the working directory
+    }
+})
+```
+
+## Logging
+
+The server logs requests to the console by default. If you want to log to a file, you can set `logging.logToFile` to `true` and `logging.logFilePath` to the path of the log file.
+
+## Debug
+
+If you set `debug` to `true`, the server will show debug information on error pages. This is useful for development, but you should disable it in production.
