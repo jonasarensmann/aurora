@@ -50,7 +50,7 @@ aurora.get("/hello", function(request)
     return aurora.sendHtml("index.html", data) -- Path is relative to the working directory
 end)
 
-aurora.createServer() -- http://localhost:8080/hello
+aurora.createServer({}) -- http://localhost:8080/hello
 ```
 
 In this example, we are rendering the `index.html` template file with the data provided in the `data` table. The `sendHtml` function will replace the placeholders in the template file with the actual values and return the resulting HTML content.
@@ -97,5 +97,5 @@ aurora.get("/hello", function(request)
     return aurora.sendHtml("index.html", data)
 end)
 
-aurora.createServer() -- http://localhost:8080/hello
+aurora.createServer({}) -- http://localhost:8080/hello
 ```

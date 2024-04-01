@@ -40,6 +40,8 @@ aurora.get("/middleware", function(request)
 
     return { body = "middleware ran" ,status = 200 }
 end, {"name"})
+
+aurora.createServer({})
 ```
 
 ## Stop Middleware
@@ -66,6 +68,8 @@ aurora.get("/middleware", function(request)
 
     return { body = "middleware ran" ,status = 200 }
 end, {"name"})
+
+aurora.createServer({})
 ```
 
 Visit `/middleware?stop=true` to see the middleware stop the route from running.
