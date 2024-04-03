@@ -20,8 +20,8 @@ type Config = {
     }?
 }
 
-local function createServer(config: Config)
-    _G.config = config
+local function createServer(config: Config?)
+    _G.config = config or {}
     
     local _server = net.serve(_G.config.port or 8080, function(request)
         return requestHandler(request)
