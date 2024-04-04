@@ -8,7 +8,7 @@ local html = require("html.luau")
 
 local routes: types.Routes = {}
 
-local workingDirectory = string.gsub(process.spawn("pwd").stdout, "\n", "")
+local workingDirectory = process.cwd
 
 local function createRouteResponse(_self: { body: string, status: number, headers: { [string]: string }}): types.RouteResponse
     local self = _self or {}
