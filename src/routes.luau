@@ -72,7 +72,7 @@ local function delete(path: string, handler: (request: types.Request, resonse: t
 end
 
 local function static(path: string, directory: string)
-    local function handler(request, response): types.RouteResponse
+    local function handler(request, response)
         local file
 
         local directory = directory
@@ -87,7 +87,7 @@ local function static(path: string, directory: string)
         end
 
         if fs.isFile(file) then 
-            response.send(fs.readFile)
+            response.send(fs.readFile(file))
         else
             response.setStatus(404)
             response.send(errorPage(404, "The requested URL was not found on this server.")) 
@@ -116,8 +116,7 @@ local function static(path: string, directory: string)
         else
             response.setHeader("Content-Type", "text/plain")
         end
-       
-        return response
+
     end
 
     table.insert(routes, {path = path, method = "GET", handler = handler, static = true})
