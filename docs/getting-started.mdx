@@ -18,8 +18,8 @@ git clone https://github.com/jonasarensmann/aurora.git
 ```lua
 local aurora = require("aurora/main")
 
-aurora.get("/", function()
-    return { body = "Index", status = 200 }
+aurora.get("/", function(req, res)
+    res.send("Hello World")
 end)
 
 aurora.createServer({

@@ -1,0 +1,43 @@
+---
+title: RouteResponse
+---
+
+# RouteResponse
+
+A response object represents the response to a request. It contains the status code, the body of the response, and the headers.
+
+## Properties
+
+| Name        | Type                                  | Description                              |
+| ----------- | ------------------------------------- | ---------------------------------------- |
+| `setStatus` | `(number) -> nil`                     | Sets the status code of the response.    |
+| `setHeader` | `(string, string) -> nil`             | Sets a header in the response.           |
+| `send`      | `(string, string?) -> nil`            | Sends a response to the client.          |
+| `json`      | `(any) -> nil`                        | Sends a JSON response to the client.     |
+| `redirect`  | `(string) -> nil`                     | Redirects the client to a different URL. |
+| `html`      | `(string, { [string]: any }?) -> nil` | Sends an HTML response to the client.    |
+
+## Example
+
+```lua
+local aurora = require("aurora")
+
+aurora.get("/hello", function(req, res)
+    res.send("Hello, world!")
+end)
+
+aurora.createServer()
+```
+
+---
+
+```lua
+type RouteResponse = {
+    setStatus: (number) -> nil,
+    setHeader: (string, string) -> nil,
+    send: (string, string?) -> nil,
+    json: (any) -> nil,
+    redirect: (string) -> nil,
+    html: (string, { [string]: any }?) -> nil,
+}
+```

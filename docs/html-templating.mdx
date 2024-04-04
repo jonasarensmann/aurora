@@ -40,17 +40,17 @@ To render the template, we can use the `sendHtml` function. Here is an example:
 ```lua
 local aurora = require("aurora/main")
 
-aurora.get("/hello", function(request)
+aurora.get("/hello", function(req, res)
     local data = {
         title = "Hello World",
         heading = "Welcome to Aurora",
         content = "This is a simple example of HTML templating in Aurora."
     }
 
-    return aurora.sendHtml("index.html", data) -- Path is relative to the working directory
+    res.html("index.html", data) -- Path is relative to the working directory
 end)
 
-aurora.createServer({}) -- http://localhost:8080/hello
+aurora.createServer() -- http://localhost:8080/hello
 ```
 
 In this example, we are rendering the `index.html` template file with the data provided in the `data` table. The `sendHtml` function will replace the placeholders in the template file with the actual values and return the resulting HTML content.
@@ -87,15 +87,15 @@ To render the template with the loop, you can use the following luau code:
 ```lua
 local aurora = require("aurora/main")
 
-aurora.get("/hello", function(request)
+aurora.get("/hello", function(req, res)
     local data = {
         title = "Hello World",
         heading = "Welcome to Aurora",
         items = {"Item 1", "Item 2", "Item 3"}
     }
 
-    return aurora.sendHtml("index.html", data)
+    res.html("index.html", data)
 end)
 
-aurora.createServer({}) -- http://localhost:8080/hello
+aurora.createServer() -- http://localhost:8080/hello
 ```

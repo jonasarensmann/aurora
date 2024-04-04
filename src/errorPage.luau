@@ -1,5 +1,3 @@
-local types = require("types.luau")
-
 local errorPageTemplate = [[
     <!DOCTYPE html>
     <html lang="en">
@@ -202,9 +200,8 @@ local errorPageTemplate = [[
     </html>    
 ]]
 
-local function showErrorPage(status, message): types.Response
-    local html = errorPageTemplate:gsub("{{title}}", _G.config.title or "Aurora"):gsub("{{status}}", status):gsub("{{message}}", message)
-    return { status = status, body = html, headers = { ["Content-Type"] = "text/html" } }
+local function errorPage(status, message): string
+    return errorPageTemplate:gsub("{{title}}", _G.config.title or "Aurora"):gsub("{{status}}", status):gsub("{{message}}", message)
 end
 
-return showErrorPage
+return errorPage

@@ -17,5 +17,13 @@ return function(request: types.Request): types.Response
         return middlewareResponse
     end
 
-    return route.handler(request)
+    local obj = { body = "", status = 200, headers = {}}
+    local RouteResponseObj = routes.createRouteResponse(obj)
+    route.handler(request, RouteResponseObj)
+    
+    return {
+        status = obj.status,
+        body = obj.body,
+        headers = obj.headers
+    }
 end

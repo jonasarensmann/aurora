@@ -14,11 +14,11 @@ It is inspired by [Express](https://expressjs.com)
 local aurora = require("aurora/main")
 
 -- GET request to /
-aurora.get("/", function()
-    return { body = "index", status = 200 }
+aurora.get("/", function(req, res)
+    res.send("Hello World")
 end)
 
-aurora.createServer({}) -- runs the server on port 8080
+aurora.createServer() -- runs the server on port 8080
 ```
 
 <br />

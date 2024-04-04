@@ -1,36 +1,79 @@
 local fs = require("@lune/fs")
 local process = require("@lune/process")
+local net = require("@lune/net")
+
 local types = require("types.luau")
+local errorPage = require("errorPage.luau")
+local html = require("html.luau")
 
 local routes: types.Routes = {}
 
 local workingDirectory = string.gsub(process.spawn("pwd").stdout, "\n", "")
 
-local function get(path: string, handler: (request: types.Request) -> types.Response, middleware: { string }?)
+local function createRouteResponse(_self: { body: string, status: number, headers: { [string]: string }}): types.RouteResponse
+    local self = _self or {}
+
+    function self.setStatus(status: number)
+        self.status = status
+    end
+
+    function self.setHeader(key: string, value: string)
+        self.headers[key] = value
+    end 
+
+    function self.send(body: string, contentType: string?)
+        self.body = body
+        self.headers["Content-Type"] = contentType or "text/plain"
+    end
+
+    function self.json(body: any, pretty: boolean?)
+        self.body = net.jsonEncode(body, pretty or false)
+        self.headers["Content-Type"] = "application/json"
+    end
+
+    function self.html(path: string, keys: { [string]: string }?)
+        self.body = html.renderHtml(path, keys or {})
+        self.headers["Content-Type"] = "text/html"
+    end
+
+    function self.redirect(url: string)
+        self.status = 302
+        self.headers["Location"] = url
+    end   
+
+    return {
+        setStatus = self.setStatus,
+        setHeader = self.setHeader,
+        send = self.send,
+        json = self.json,
+        html = self.html,
+        redirect = self.redirect,
+    }
+end
+
+local function get(path: string, handler: (request: types.Request, resonse: types.RouteResponse) -> types.RouteResponse, middleware: { string }?)
     table.insert(routes, {path = path, method = "GET", middleware = middleware, handler = handler})
 end
 
-local function post(path: string, handler: (request: types.Request) -> types.Response, middleware: { string }?)
+local function post(path: string, handler: (request: types.Request, resonse: types.RouteResponse) -> types.RouteResponse, middleware: { string }?)
     table.insert(routes, {path = path, method = "POST", middleware = middleware, handler = handler})
 end
 
-local function put(path: string, handler: (request: types.Request) -> types.Response, middleware: { string }?)
+local function put(path: string, handler: (request: types.Request, resonse: types.RouteResponse) -> types.RouteResponse, middleware: { string }?)
     table.insert(routes, {path = path, method = "PUT", middleware = middleware, handler = handler})
 end
 
-local function patch(path: string, handler: (request: types.Request) -> types.Response, middleware: { string }?)
+local function patch(path: string, handler: (request: types.Request, resonse: types.RouteResponse) -> types.RouteResponse, middleware: { string }?)
     table.insert(routes, {path = path, method = "PATCH", middleware = middleware, handler = handler})
 end
 
-local function delete(path: string, handler: (request: types.Request) -> types.Response, middleware: { string }?)
+local function delete(path: string, handler: (request: types.Request, resonse: types.RouteResponse) -> types.RouteResponse, middleware: { string }?)
     table.insert(routes, {path = path, method = "DELETE", middleware = middleware, handler = handler})
 end
 
 local function static(path: string, directory: string)
-    local function handler(request)
+    local function handler(request, response): types.RouteResponse
         local file
-        local status = 200
-        local body = ""
 
         local directory = directory
 
@@ -44,43 +87,37 @@ local function static(path: string, directory: string)
         end
 
         if fs.isFile(file) then 
-            body = fs.readFile(file)
+            response.send(fs.readFile)
         else
-            local res: types.Response = {status = 404, body = "Not Found"}
-            return res
+            response.setStatus(404)
+            response.send(errorPage(404, "The requested URL was not found on this server.")) 
         end
 
-        local headers = {}
-
-        -- add the content type
         if string.find(file, ".html") then
-            headers["Content-Type"] = "text/html"
+            response.setHeader("Content-Type", "text/html")
         elseif string.find(file, ".css") then
-            headers["Content-Type"] = "text/css"
+            response.setHeader("Content-Type", "text/css")
         elseif string.find(file, ".js") then
-            headers["Content-Type"] = "application/javascript"
+            response.setHeader("Content-Type", "text/javascript")
         elseif string.find(file, ".json") then
-            headers["Content-Type"] = "application/json"
+            response.setHeader("Content-Type", "application/json")
         elseif string.find(file, ".png") then
-            headers["Content-Type"] = "image/png"
+            response.setHeader("Content-Type", "image/png")
         elseif string.find(file, ".jpg") then
-            headers["Content-Type"] = "image/jpeg"
+            response.setHeader("Content-Type", "image/jpg")
         elseif string.find(file, ".jpeg") then
-            headers["Content-Type"] = "image/jpeg"
+            response.setHeader("Content-Type", "image/jpeg")
         elseif string.find(file, ".gif") then
-            headers["Content-Type"] = "image/gif"
+            response.setHeader("Content-Type", "image/gif")
         elseif string.find(file, ".svg") then
-            headers["Content-Type"] = "image/svg+xml"
+            response.setHeader("Content-Type", "image/svg+xml")
         elseif string.find(file, ".ico") then
-            headers["Content-Type"] = "image/x-icon"
+            response.setHeader("Content-Type", "image/x-icon")
         else
-            headers["Content-Type"] = "text/plain"
+            response.setHeader("Content-Type", "text/plain")
         end
        
-        local res: types.Response = {status = status, body = body, headers = headers}
-
-        return res
-
+        return response
     end
 
     table.insert(routes, {path = path, method = "GET", handler = handler, static = true})
@@ -108,5 +145,6 @@ return {
     patch = patch,
     delete = delete,
     static = static,
-    findRoute = findRoute
+    findRoute = findRoute,
+    createRouteResponse = createRouteResponse
 }

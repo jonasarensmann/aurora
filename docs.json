@@ -16,7 +16,7 @@
         ["Routing", "/routing"],
         ["Middleware", "/middleware"],
         ["Request", "/request"],
-        ["Response", "/response"],
+        ["RouteResponse", "/route-response"],
         ["HTML Templating", "/html-templating"]
       ]
     ]

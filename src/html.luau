@@ -1,6 +1,5 @@
 local fs = require("@lune/fs")
 
-local types = require("types.luau")
 local errorPage = require("errorPage.luau")
 
 local function escapeHtml(str: string)
@@ -12,7 +11,7 @@ local function escapeHtml(str: string)
     return str    
 end
 
-local function sendHtml(html: string, keys: { [string]: string | {any} | number }?, status: number?): types.Response
+local function renderHtml(html: string, keys: { [string]: string | {any} | number }?): string
     local template = fs.readFile(html)
 
     if not template then
@@ -49,8 +48,13 @@ local function sendHtml(html: string, keys: { [string]: string | {any} | number 
             for _, item in ipairs(listValue) do
                 innerHtml = innerHtml:gsub("%s+", "")
 
-                fullHtml = fullHtml .. string.gsub(innerHtml, "{{" .. single .. "}}", item)
-                fullHtml = fullHtml .. string.gsub(innerHtml, "{{ " .. single .. " }}", item)
+                if string.match(innerHtml, "{{" .. single .. "}}") then
+                    fullHtml = fullHtml .. string.gsub(innerHtml, "{{" .. single .. "}}", item)
+                end
+
+                if string.match(innerHtml, "{{ " .. single .. " }}") then
+                    fullHtml = fullHtml .. string.gsub(innerHtml, "{{ " .. single .. " }}", item)
+                end
             end
 
             template = string.gsub(template , "{{#foreach (.-) in (.-)}}(.-){{#endforeach}}", fullHtml, 1)
@@ -58,16 +62,10 @@ local function sendHtml(html: string, keys: { [string]: string | {any} | number 
         end
     end
 
-    return {
-        status = status or 200,
-        headers = {
-            ["Content-Type"] = "text/html"
-        },
-        body = template
-    }
+    return template
 end
 
 return {
-    sendHtml = sendHtml,
+    renderHtml = renderHtml,
     htmlspecialchars = escapeHtml
 }

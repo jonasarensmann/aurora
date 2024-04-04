@@ -16,13 +16,13 @@ Aurora uses "get", "post", "put", "patch", "delete" methods to register routes.
 The `get` method is used to register a route that will only respond to HTTP GET requests:
 
 ```lua
-Aurora.get('/user', function()
-    return { body = "Hello World", status = 200 }
+Aurora.get('/', function(req, res)
+    res.send("Hello World")
 end)
 ```
 
 ```lua
-function get(path: string, handler: (request: Request) -> Response, middleware: { string }?)
+function get(path: string, handler: (request: Request, resonse: RouteResponse) -> RouteResponse, middleware: { string }?)
 ```
 
 #### Post
@@ -30,13 +30,13 @@ function get(path: string, handler: (request: Request) -> Response, middleware: 
 The `post` method is used to register a route that will only respond to HTTP POST requests:
 
 ```lua
-Aurora.post('/user', function()
-    return { body = "Hello World", status = 200 }
+Aurora.post('/', function(req, res)
+    res.send("Hello World")
 end)
 ```
 
 ```lua
-function post(path: string, handler: (request: Request) -> Response, middleware: { string }?)
+function post(path: string, handler: (request: Request, resonse: RouteResponse) -> RouteResponse, middleware: { string }?)
 ```
 
 #### Put
@@ -44,13 +44,13 @@ function post(path: string, handler: (request: Request) -> Response, middleware:
 The `put` method is used to register a route that will only respond to HTTP PUT requests:
 
 ```lua
-Aurora.put('/user', function()
-    return { body = "Hello World", status = 200 }
+Aurora.put('/', function(req, res)
+    res.send("Hello World")
 end)
 ```
 
 ```lua
-function put(path: string, handler: (request: Request) -> Response, middleware: { string }?)
+function put(path: string, handler: (request: Request, resonse: RouteResponse) -> RouteResponse, middleware: { string }?)
 ```
 
 #### Patch
@@ -58,13 +58,13 @@ function put(path: string, handler: (request: Request) -> Response, middleware: 
 The `patch` method is used to register a route that will only respond to HTTP PATCH requests:
 
 ```lua
-Aurora.patch('/user', function()
-    return { body = "Hello World", status = 200 }
+Aurora.patch('/', function(req, res)
+    res.send("Hello World")
 end)
 ```
 
 ```lua
-function patch(path: string, handler: (request: Request) -> Response, middleware: { string }?)
+function patch(path: string, handler: (request: Request, resonse: RouteResponse) -> RouteResponse, middleware: { string }?)
 ```
 
 #### Delete
@@ -72,11 +72,11 @@ function patch(path: string, handler: (request: Request) -> Response, middleware
 The `delete` method is used to register a route that will only respond to HTTP DELETE requests:
 
 ```lua
-Aurora.delete('/user', function()
-    return { body = "Hello World", status = 200 }
+Aurora.delete('/', function(req, res)
+    res.send("Hello World")
 end)
 ```
 
 ```lua
-function delete(path: string, handler: (request: Request) -> Response, middleware: { string }?)
+function delete(path: string, handler: (request: Request, resonse: RouteResponse) -> RouteResponse, middleware: { string }?)
 ```

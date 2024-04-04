@@ -8,11 +8,13 @@ The 'Request' object is used to access the request data sent by the client to th
 
 ## Properties
 
-- path (string): The path of the request URL.
-- method (string): The HTTP method of the request.
-- headers (object): The headers of the request.
-- query (object): The query parameters of the request.
-- body (string): The body of the request.
+| Name    | Type     | Description                                                                |
+| ------- | -------- | -------------------------------------------------------------------------- |
+| path    | `string` | The path of the request.                                                   |
+| method  | `string` | The HTTP method of the request.                                            |
+| headers | `object` | An object containing the headers of the request.                           |
+| query   | `object` | An object containing the query parameters of the request.                  |
+| body    | `string` | The body of the request. This is only available for POST and PUT requests. |
 
 ---
 

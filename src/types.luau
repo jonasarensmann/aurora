@@ -17,7 +17,16 @@ export type Route = {
     method: string,
     static: boolean?,
     middleware: { string }?,
-    handler: (Request) -> {status: number, body: string, headers: { any: any }?}
+    handler: (Request, RouteResponse) -> RouteResponse
+}
+
+export type RouteResponse = {
+    setStatus: (number) -> nil,
+    setHeader: (string, string) -> nil,
+    send: (string, string?) -> nil,
+    json: (any) -> nil,
+    redirect: (string) -> nil,
+    html: (string, { [string]: any }?) -> nil,
 }
 
 export type Routes = {

@@ -12,8 +12,8 @@ Aurora is a simple web framework for the [Lune Runtime](https://github.com/lune-
 ```lua
 local aurora = require("aurora/main")
 
-aurora.get("/", function()
-    return { body = "Index", status = 200 }
+aurora.get("/", function(req, res)
+    res.send("Hello, World!")
 end)
 
 aurora.createServer({
