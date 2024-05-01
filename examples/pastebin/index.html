@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pastebin - Aurora</title>
+  </head>
+  <body>
+    <h1>Pastebin like application built with Aurora</h1>
+
+    <form action="/upload" method="post" enctype="text/plain">
+      <textarea name="content" id="content" cols="30" rows="10"></textarea>
+      <br />
+      <input type="submit" value="Upload" />
+    </form>
+
+    <h3>Open Paste</h3>
+    <form action="/" method="get">
+      <input type="text" name="id" id="id" />
+      <input type="submit" value="Open" />
+    </form>
+  </body>
+</html>
