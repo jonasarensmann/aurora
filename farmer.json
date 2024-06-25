@@ -1,0 +1,8 @@
+{
+  "author": "Jonas Arensmann <jonas@jonas-arensmann.com>",
+  "dependencies": {},
+  "description": "A Web framework for Lune inspired by express",
+  "license": "MIT license",
+  "name": "aurora",
+  "version": "0.1.1"
+}

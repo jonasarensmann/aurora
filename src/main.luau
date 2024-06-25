@@ -6,7 +6,7 @@ local requestHandler = require("requestHandler.luau")
 local routes = require("routes.luau")
 local middleware = require("middleware.luau")
 
-local version = "0.1.0"
+local version = "0.1.1"
 
 type Config = {
     port: number?,

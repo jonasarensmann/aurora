@@ -1,4 +1,4 @@
-local aurora = require("../../main")
+local aurora = require("../../src/main.luau")
 local fs = require("@lune/fs")
 local process = require("@lune/process")
 
@@ -50,7 +50,7 @@ aurora.post("/upload", function(req, res)
 
     fs.writeFile(process.cwd .. "uploads/" .. fileName, content)
 
-    res.send(fileName)
+    res.redirect("/?id=" .. fileName)
 end)
 
 aurora.createServer({

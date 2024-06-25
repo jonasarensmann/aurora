@@ -6,7 +6,7 @@ local types = require("types.luau")
 local errorPage = require("errorPage.luau")
 local html = require("html.luau")
 
-local routes: types.Routes = {}
+_G.routes = {}
 
 local workingDirectory = process.cwd
 
@@ -59,23 +59,23 @@ local function createRouteResponse(_self: { body: string, status: number, header
 end
 
 local function get(path: string, handler: (request: types.Request, resonse: types.RouteResponse) -> types.RouteResponse, middleware: { string }?)
-    table.insert(routes, {path = path, method = "GET", middleware = middleware, handler = handler})
+    table.insert(_G.routes, {path = path, method = "GET", middleware = middleware, handler = handler})
 end
 
 local function post(path: string, handler: (request: types.Request, resonse: types.RouteResponse) -> types.RouteResponse, middleware: { string }?)
-    table.insert(routes, {path = path, method = "POST", middleware = middleware, handler = handler})
+    table.insert(_G.routes, {path = path, method = "POST", middleware = middleware, handler = handler})
 end
 
 local function put(path: string, handler: (request: types.Request, resonse: types.RouteResponse) -> types.RouteResponse, middleware: { string }?)
-    table.insert(routes, {path = path, method = "PUT", middleware = middleware, handler = handler})
+    table.insert(_G.routes, {path = path, method = "PUT", middleware = middleware, handler = handler})
 end
 
 local function patch(path: string, handler: (request: types.Request, resonse: types.RouteResponse) -> types.RouteResponse, middleware: { string }?)
-    table.insert(routes, {path = path, method = "PATCH", middleware = middleware, handler = handler})
+    table.insert(_G.routes, {path = path, method = "PATCH", middleware = middleware, handler = handler})
 end
 
 local function delete(path: string, handler: (request: types.Request, resonse: types.RouteResponse) -> types.RouteResponse, middleware: { string }?)
-    table.insert(routes, {path = path, method = "DELETE", middleware = middleware, handler = handler})
+    table.insert(_G.routes, {path = path, method = "DELETE", middleware = middleware, handler = handler})
 end
 
 local function static(path: string, directory: string)
@@ -126,12 +126,12 @@ local function static(path: string, directory: string)
 
     end
 
-    table.insert(routes, {path = path, method = "GET", handler = handler, static = true})
+    table.insert(_G.routes, {path = path, method = "GET", handler = handler, static = true})
 
 end
 
 local function findRoute(path: string, method: string)
-    for _, route in ipairs(routes) do
+    for _, route in ipairs(_G.routes) do
         if route.static and string.find(path, route.path) then
             return route
         end
