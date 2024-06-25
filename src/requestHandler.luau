@@ -1,13 +1,18 @@
 local routes = require("routes")
 local middleware = require("middleware.luau")
 local types = require("types.luau")
+local errorPage = require("errorPage.luau")
 
 return function(request: types.Request): types.Response
     local path = request.path
     local route = routes.findRoute(path, request.method)
 
     if route == nil then
-        return {status = 404, body = "Not Found"}
+        return {
+            status = 404,
+            body = errorPage(404, "Not Found"),
+            headers = {["Content-Type"] = "text/html"}
+        }
     end
 
     middleware.buildInMiddleware(request)

@@ -1,4 +1,4 @@
-local aurora = require("aurora/main")
+local aurora = require("../../main")
 local fs = require("@lune/fs")
 local process = require("@lune/process")
 

@@ -31,6 +31,12 @@ local function createRouteResponse(_self: { body: string, status: number, header
         self.headers["Content-Type"] = "application/json"
     end
 
+    function self.download(path: string)
+        self.body = fs.readFile(path)
+        self.headers["Content-Type"] = "application/octet-stream"
+        self.headers["Content-Disposition"] = "attachment; filename=" .. path
+    end
+
     function self.html(path: string, keys: { [string]: string }?)
         self.body = html.renderHtml(path, keys or {})
         self.headers["Content-Type"] = "text/html"
@@ -46,6 +52,7 @@ local function createRouteResponse(_self: { body: string, status: number, header
         setHeader = self.setHeader,
         send = self.send,
         json = self.json,
+        download = self.download,
         html = self.html,
         redirect = self.redirect,
     }

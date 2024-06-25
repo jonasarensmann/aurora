@@ -27,10 +27,11 @@ local function createServer(config: Config?)
     end)
     stdio.write(stdio.style("bold"))
     stdio.write(stdio.color("cyan"))
-    print("Aurora v" .. version)
+    print("Aurora V" .. version)
     stdio.write(stdio.color("reset"))
     print("Server is running on port " .. (_G.config.port or 8080))
     stdio.write(stdio.style("reset"))
+    print("http://localhost:" .. (_G.config.port or 8080) .. "/")
 
     while true do 
         task.wait(1)
