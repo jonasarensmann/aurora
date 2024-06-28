@@ -1,8 +1,7 @@
 {
-  "author": "Jonas Arensmann <jonas@jonas-arensmann.com>",
   "dependencies": {},
-  "description": "A Web framework for Lune inspired by express",
-  "license": "MIT license",
+  "description": "Aurora is a simple web framework for the Lune Runtime inspired by Express.",
+  "license": "MIT license <http://opensource.org/licenses/MIT>",
   "name": "aurora",
   "version": "0.1.1"
 }

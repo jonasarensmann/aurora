@@ -67,5 +67,5 @@ end
 
 return {
     renderHtml = renderHtml,
-    htmlspecialchars = escapeHtml
+    escapeHtml = escapeHtml
 }

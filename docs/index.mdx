@@ -9,23 +9,28 @@ Aurora is a simple web framework for the [Lune Runtime](https://github.com/lune-
 
 ### Example
 
-```lua
-local aurora = require("aurora/main")
+Install Aurora using [Farmer](https://github.com/jonasarensmann/farmer)
 
+```bash
+farmer init aurora-example
+farmer add aurora
+```
+
+```lua
+local aurora = require("../crops/aurora")
+
+-- GET request to /
 aurora.get("/", function(req, res)
-    res.send("Hello, World!")
+    res.send("Hello World")
 end)
 
-aurora.createServer({
-    port = 8080,
-    debug = true,
-})
+aurora.createServer() -- runs the server on port 8080
 ```
 
 [Getting Started](/getting-started)
 
 ---
 
-#### At the moment, html special characters are not escaped automatically. This will be changed in the future.
+#### At the moment, html special characters are not escaped automatically. This may be changed in the future.
 
 use `aurora.escapeHtml` to escape html special characters.

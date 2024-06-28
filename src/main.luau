@@ -5,6 +5,7 @@ local task = require("@lune/task")
 local requestHandler = require("requestHandler.luau")
 local routes = require("routes.luau")
 local middleware = require("middleware.luau")
+local html = require("html.luau")
 
 local version = "0.1.1"
 
@@ -47,4 +48,6 @@ return {
     delete = routes.delete,
     static = routes.static,
     middleware = middleware.middleware,
+    renderHtml = html.renderHtml,
+    escapeHtml = html.escapeHtml
 }

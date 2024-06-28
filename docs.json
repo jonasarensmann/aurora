@@ -1,6 +1,6 @@
 {
   "name": "Aurora",
-  "description": "Aurora a simple express-like web framework for the Lune Runtime",
+  "description": "Aurora is a simple web framework for the Lune Runtime inspired by Express.",
   "sidebar": [
     [
       "Getting Started",

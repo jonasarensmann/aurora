@@ -38,7 +38,7 @@ In this template file, we have three placeholders: `{{ title }}`, `{{ heading }}
 To render the template, we can use the `sendHtml` function. Here is an example:
 
 ```lua
-local aurora = require("aurora/main")
+local aurora = require("../crops/aurora")
 
 aurora.get("/hello", function(req, res)
     local data = {
@@ -85,7 +85,7 @@ In this template file, we have a loop that iterates over the `items` array and g
 To render the template with the loop, you can use the following luau code:
 
 ```lua
-local aurora = require("aurora/main")
+local aurora = require("../crops/aurora")
 
 aurora.get("/hello", function(req, res)
     local data = {

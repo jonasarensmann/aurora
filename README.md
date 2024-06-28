@@ -10,8 +10,15 @@ It is inspired by [Express](https://expressjs.com)
 
 #### Example
 
+Install Aurora using [Farmer](https://github.com/jonasarensmann/farmer)
+
+```bash
+farmer init aurora-example
+farmer add aurora
+```
+
 ```lua
-local aurora = require("aurora/main")
+local aurora = require("../crops/aurora")
 
 -- GET request to /
 aurora.get("/", function(req, res)
