@@ -6,7 +6,7 @@ title: Configuration
 
 ## Introduction
 
-The configuration is done in the `createServer` method. The configuration is an object with the following properties:
+The configuration is done in the `serve` method. The configuration is an object with the following properties:
 
 - `port` (number): The port to listen on. Default is `8080`.
 - `debug` (boolean): If `true`, the server will show debug information on error Pages. Default is `false`.
@@ -18,7 +18,7 @@ The configuration is done in the `createServer` method. The configuration is an 
 ## Example
 
 ```lua
-aurora.createServer({
+aurora.serve({
     port = 8080,
     debug = true,
     logging = {

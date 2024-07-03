@@ -1,4 +1,4 @@
-local aurora = require("../../src/main.luau")
+local aurora = require("../../src")
 local fs = require("@lune/fs")
 local process = require("@lune/process")
 
@@ -53,6 +53,6 @@ aurora.post("/upload", function(req, res)
     res.redirect("/?id=" .. fileName)
 end)
 
-aurora.createServer({
+aurora.serve({
     port = 8080,
 })

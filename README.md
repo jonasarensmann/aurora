@@ -19,14 +19,14 @@ farmer add aurora
 ```
 
 ```lua
-local aurora = require("../crops/aurora")
+local aurora = require("@aurora/")
 
 -- GET request to /
 aurora.get("/", function(req, res)
     res.send("Hello World")
 end)
 
-aurora.createServer() -- runs the server on port 8080
+aurora.serve() -- runs the server on port 8080
 ```
 
 <br />

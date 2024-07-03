@@ -12,7 +12,7 @@ Middleware is a function that runs before the route handler. It can be used to p
 To use middleware, you can create it via aurora.Middleware and then use it in the route.
 
 ```lua
-local aurora = require("../crops/aurora")
+local aurora = require("@aurora/")
 
 -- Create a middleware
 aurora.middleware("name" ,function(request)
@@ -25,7 +25,7 @@ end)
 To use the middleware, you can pass it as the third argument in the route.
 
 ```lua
-local aurora = require("../crops/aurora")
+local aurora = require("@aurora/")
 
 -- Create a middleware
 aurora.middleware("name" ,function(request)
@@ -41,7 +41,7 @@ aurora.get("/middleware", function(req, res)
     res.send("middleware ran")
 end, {"name"})
 
-aurora.createServer()
+aurora.serve()
 ```
 
 ## Stop Middleware
@@ -49,7 +49,7 @@ aurora.createServer()
 You can stop the middleware from running by returning a response from the middleware.
 
 ```lua
-local aurora = require("../crops/aurora")
+local aurora = require("@aurora/")
 
 -- Create a middleware
 aurora.middleware("name" ,function(request)
@@ -69,7 +69,7 @@ aurora.get("/middleware", function(req, res)
     res.send("middleware ran")
 end, {"name"})
 
-aurora.createServer()
+aurora.serve()
 ```
 
 Visit `/middleware?stop=true` to see the middleware stop the route from running.

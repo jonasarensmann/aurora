@@ -38,7 +38,7 @@ In this template file, we have three placeholders: `{{ title }}`, `{{ heading }}
 To render the template, we can use the `sendHtml` function. Here is an example:
 
 ```lua
-local aurora = require("../crops/aurora")
+local aurora = require("@aurora/")
 
 aurora.get("/hello", function(req, res)
     local data = {
@@ -50,7 +50,7 @@ aurora.get("/hello", function(req, res)
     res.html("index.html", data) -- Path is relative to the working directory
 end)
 
-aurora.createServer() -- http://localhost:8080/hello
+aurora.serve() -- http://localhost:8080/hello
 ```
 
 In this example, we are rendering the `index.html` template file with the data provided in the `data` table. The `sendHtml` function will replace the placeholders in the template file with the actual values and return the resulting HTML content.
@@ -85,7 +85,7 @@ In this template file, we have a loop that iterates over the `items` array and g
 To render the template with the loop, you can use the following luau code:
 
 ```lua
-local aurora = require("../crops/aurora")
+local aurora = require("@aurora/")
 
 aurora.get("/hello", function(req, res)
     local data = {
@@ -97,5 +97,5 @@ aurora.get("/hello", function(req, res)
     res.html("index.html", data)
 end)
 
-aurora.createServer() -- http://localhost:8080/hello
+aurora.serve() -- http://localhost:8080/hello
 ```

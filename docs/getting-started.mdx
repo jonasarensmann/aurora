@@ -13,20 +13,21 @@ description: Get started with docs.page on your repository.
 
 ```bash
 farmer init aurora-example
+cd aurora-example
 farmer add aurora
 ```
 
 3. Add the example code to src/main.luau
 
 ```lua
-local aurora = require("../crops/aurora")
+local aurora = require("@aurora/")
 
 -- GET request to /
 aurora.get("/", function(req, res)
     res.send("Hello World")
 end)
 
-aurora.createServer() -- runs the server on port 8080
+aurora.serve() -- runs the server on port 8080
 ```
 
 4. Run the server
@@ -46,13 +47,13 @@ git clone https://github.com/jonasarensmann/aurora.git
 2. Create main.luau in your project root and add the example code
 
 ```lua
-local aurora = require("aurora/src/main")
+local aurora = require("aurora/src")
 
 aurora.get("/", function(req, res)
     res.send("Hello World")
 end)
 
-aurora.createServer({
+aurora.serve({
     port = 8080,
     debug = true,
 })
