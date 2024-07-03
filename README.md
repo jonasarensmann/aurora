@@ -14,6 +14,7 @@ Install Aurora using [Farmer](https://github.com/jonasarensmann/farmer)
 
 ```bash
 farmer init aurora-example
+cd aurora-example
 farmer add aurora
 ```
 
