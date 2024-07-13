@@ -1,5 +1,3 @@
-<img align="right" width="200" src="https://aurora.jonas-arensmann.com/logo.svg" alt="Aurora logo" />
-
 <h1 align="left">Aurora</h1>
 
 <br/>
