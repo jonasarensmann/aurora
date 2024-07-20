@@ -13,7 +13,7 @@ end
 local function getFileName()
     local fileName = randomString(10)
     if fs.isFile(process.cwd .. "uploads/" .. fileName) then
-        return getFileName()
+      return getFileName()
     end
     return fileName
 end
